@@ -1,11 +1,9 @@
 import AlunoItem from "@/components/AlunoItem";
 
-export default async function AlunosPage() {
-  const alunos = await fetch("http://localhost:8080/alunos").then((res) =>
-    res.json(),
-  );
+import { getAlunos } from "./actions";
 
-  console.log(alunos);
+export default async function AlunosPage() {
+  const alunos = await getAlunos();
 
   return (
     <div className="h-screen w-screen flex flex-col items-center">
@@ -13,7 +11,9 @@ export default async function AlunosPage() {
 
       <div className="w-[90%] h-100 bg-white rounded-md shadow-md shadow-white text-black p-2 overflow-auto">
         <ul className="flex flex-col items-center gap-2">
-          <AlunoItem id={1} nome="Marco Aurélio" />
+          {alunos.map((aluno) => (
+            <AlunoItem key={aluno.id} nome={aluno.nome} id={aluno.id} />
+          ))}
         </ul>
       </div>
     </div>
