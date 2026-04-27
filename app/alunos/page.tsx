@@ -1,6 +1,7 @@
 import AlunoItem from "@/components/AlunoItem";
 
 import { getAlunos } from "./actions";
+import Link from "next/link";
 
 export default async function AlunosPage() {
   const alunos = await getAlunos();
@@ -16,6 +17,13 @@ export default async function AlunosPage() {
           ))}
         </ul>
       </div>
+
+      <Link
+        href="/aluno/cadastro"
+        className="px-5 py-2 bg-white text-black mt-5 rounded-lg"
+      >
+        Cadastrar aluno
+      </Link>
     </div>
   );
 }
