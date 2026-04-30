@@ -2,6 +2,7 @@
 
 import { Aluno } from "@/interfaces/alunos";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function getAluno(id: number) {
   const cookiesStore = await cookies();
@@ -11,12 +12,13 @@ export async function getAluno(id: number) {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  })
-    .then((res) => res.json())
-    .catch((e) => {
-      console.error(e);
-      return {};
-    });
+  });
 
-  return response as Aluno;
+  const data = await response.json();
+
+  if (response.status === 401) {
+    redirect("/login");
+  }
+
+  return data as Aluno;
 }

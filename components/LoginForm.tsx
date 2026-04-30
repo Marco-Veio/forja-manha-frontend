@@ -28,14 +28,14 @@ export default function LoginForm({ onSend }: Props) {
       <input
         type="email"
         placeholder="Email"
-        className="w-full border border-black"
+        className="w-full border border-black px-1"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
         type="password"
         placeholder="Senha"
-        className="w-full border border-black"
+        className="w-full border border-black px-1"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
