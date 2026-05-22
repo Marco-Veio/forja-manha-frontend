@@ -24,16 +24,21 @@ export async function createAluno(aluno: CreateAluno) {
     body: JSON.stringify(aluno),
   });
 
-  const data = await response.json();
-
+  
   if (response.status === 201) {
     revalidateTag("listar", "max");
     return;
   }
-
+  
   if (response.status === 401) {
     redirect("/login");
   }
-
-  return data;
+  
+  try {
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    console.error(e);
+    return "Erro ao cadastrar o aluno";
+  }
 }
